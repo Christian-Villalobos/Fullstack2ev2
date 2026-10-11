@@ -1,20 +1,19 @@
 import { Image } from '../atoms/Image';
-import { Button } from '../atoms/Button';
-import { NavLinks } from '../molecules/Navlinks';
+import { ButtonGroup } from '../molecules/ButtonGroup';
+import { NavLinks } from '../molecules/NavLinksTemp';
 
-// Organismo: une logo + enlaces + botón (opcional)
-export function Navbar({ logo, links = [], buttonText, onButtonClick, className = '' }) {
+// Organismo: logo (opcional) + enlaces (opcionales) + botones (opcionales)
+export function Navbar({ logo, links = [], buttons = [], className = '' }) {
     return (
-        // <nav> es la etiqueta semántica para barras de navegación
         <nav className={`navbar ${className}`}>
             {/* El logo solo se muestra si se pasa */}
             {logo && <Image src={logo.src} alt={logo.alt} />}
 
-            <NavLinks links={links} />
+            {/* Los enlaces solo se muestran si hay al menos uno */}
+            {links.length > 0 && <NavLinks links={links} />}
 
-            {/* El botón solo se muestra si se pasa un texto */}
-            {buttonText && <Button onClick={onButtonClick}>{buttonText}</Button>}
+            {/* Los botones solo se muestran si hay al menos uno */}
+            {buttons.length > 0 && <ButtonGroup buttons={buttons} />}
         </nav>
     );
 }
-
