@@ -1,5 +1,5 @@
-export function Image({src, alt = '',}) {
+export function Image({ className, src, alt = '', }) {
     return (
-        <img src={src} alt={alt} />
+        <img className={className} src={src} alt={alt} />
     );
 }
