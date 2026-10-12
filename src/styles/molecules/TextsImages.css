@@ -1,0 +1,8 @@
+/* src/styles/molecules/TextsImages.css (o organisms/, según dónde esté el componente) */
+
+/* Contenedor de varios bloques texto + imagen: los separa verticalmente */
+.texts-images {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}

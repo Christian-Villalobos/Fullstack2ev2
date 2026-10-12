@@ -1,0 +1,43 @@
+/* Estilos de la molécula TextImage: texto a un lado, imagen al otro */
+
+/* Caja principal: pone texto e imagen uno al lado del otro */
+.text-image {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Texto: ocupa el espacio que sobra */
+.text-image p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    flex: 1;
+}
+
+/* Imagen: tamaño máximo y bordes redondeados */
+.text-image img {
+    max-width: 380px;
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Variante: invierte el orden (imagen a la izquierda, texto a la derecha) */
+.text-image.reverse {
+    flex-direction: row-reverse;
+}
+
+/* Pantallas pequeñas: texto e imagen uno sobre otro.
+   Va al final para que gane sobre las reglas de arriba */
+@media (max-width: 768px) {
+    .text-image,
+    .text-image.reverse {
+        flex-direction: column;
+        text-align: center;
+    }
+}

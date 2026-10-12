@@ -3,6 +3,9 @@ import './styles/global.css'
 import './styles/atoms/Button.css'
 import './styles/organisms/Navbar.css'
 import './styles/templates/HomeTemplate.css'
+import './styles/molecules/TextImage.css'
+import './styles/molecules/TextsImages.css'
+import './styles/organisms/Footer.css'
 
 // ── Datos que alimentan el HomeTemplate ──
 
@@ -45,9 +48,20 @@ const introData = [
   {
     src: '/images/poe2-soldier.webp',   // aquí puedes poner otra imagen
     alt: "Compra segura",
-    content: "Todas las transacciones son rápidas y seguras. Compra y vende sin complicaciones."
+    content: "Todas las transacciones son rápidas y seguras. Compra y vende sin complicaciones.",
+    className: "reverse"  // Esta clase hará que la imagen y el texto se inviertan en el diseño
   }
 ];
+
+const footerData = {
+  links: [
+    { label: "Términos y condiciones", href: "#terminos"},
+    { label: "Privacidad", href: "#privacidad" },
+    { label: "Contacto", href: "#contacto" }
+  ],
+  text: "© 2026 Path of Exile Currency Exchange. Todos los derechos reservados."
+};
+
 
 // ── Componente App ──
 
@@ -58,6 +72,7 @@ function App() {
       titles={titlesData}
       logo={logoData}
       intros={introData}
+      footer={footerData}
     />
   )
 }
