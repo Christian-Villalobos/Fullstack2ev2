@@ -16,9 +16,9 @@ const navbarData = {
     className: "navbar-logo"
   },
   links: [
-    { label: "Inicio", href: "#" },
-    { label: "Comprar", href: "#comprar" },
-    { label: "Vender", href: "#vender" },
+    { label: "Inicio", href: "#inicio" },
+    { label: "Quienes somos", href: "#Quienes-somos" },
+    { label: "Tienda", href: "/tienda" },
     { label: "Contacto", href: "#contacto" }
   ],
   buttons: [
