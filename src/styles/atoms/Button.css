@@ -1,0 +1,18 @@
+/* Estilo común a todos los botones */
+button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* Variantes de color (se eligen con className) */
+.btn-gold  { 
+    background-color: var(--color-gold, #afa124); 
+    color: #111111;
+}
+
+.btn-white { 
+    background-color: var(--color-cyan, #3ca8ac); 
+    color: #ffffff;
+}
