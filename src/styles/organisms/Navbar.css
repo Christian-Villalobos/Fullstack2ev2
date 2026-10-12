@@ -1,0 +1,38 @@
+/* Navbar: distribución de logo, enlaces y botones */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 28px;
+    gap: 20px;
+}
+
+.navbar .navbar-logo {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+}
+
+.navbar a {
+    color: var(--color-texto);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.navbar a:hover {
+    color: var(--color-gold, #afa124);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}

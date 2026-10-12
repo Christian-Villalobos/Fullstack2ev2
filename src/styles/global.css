@@ -1,0 +1,14 @@
+/* Variables: se definen una vez y se usan en todos los archivos */
+:root {
+    --color-fondo: #111111;
+    --color-texto: #ffffff;
+    --color-gold: #afa124;
+    --color-cyan: #3ca8ac;
+}
+
+/* Estilo base de toda la página */
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    margin: 0;
+}
