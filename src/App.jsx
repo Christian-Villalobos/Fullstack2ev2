@@ -22,9 +22,9 @@ const navbarData = {
     className: "navbar-logo"
   },
   links: [
-    { label: "Inicio", href: "#" },
-    { label: "Quiénes Somos", href: "#quienes-somos" },
-    { label: "Tienda", href: "#tienda" },
+    { label: "Inicio", href: "#inicio" },
+    { label: "Quienes somos", href: "#Quienes-somos" },
+    { label: "Tienda", href: "/tienda" },
     { label: "Contacto", href: "#contacto" }
   ],
   buttons: [
