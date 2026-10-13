@@ -12,6 +12,8 @@ import './styles/molecules/TextImage.css';
 import './styles/molecules/TextsImages.css';
 import './styles/molecules/ImageCards.css';
 import './styles/organisms/Footer.css';
+import './styles/molecules/ProductCard.css'
+import './styles/organisms/ProductList.css'
 
 // ── Datos compartidos (Navbar y Footer) ──
 
