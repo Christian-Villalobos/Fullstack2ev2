@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
+import { ShopPage } from './pages/ShopPage';
 
 // Estilos globales y modulares
 import './styles/global.css';
@@ -26,7 +27,7 @@ const navbarData = {
   links: [
     { label: "Inicio", href: "#inicio" },
     { label: "Quienes somos", href: "#Quienes-somos" },
-    { label: "Tienda", href: "/tienda" },
+    { label: "Tienda", href: "#tienda" },
     { label: "Contacto", href: "#contacto" }
   ],
   buttons: [
@@ -48,18 +49,18 @@ const footerData = {
 // ── Componente Principal App ──
 
 function App() {
-  // Manejo de navegación simple por hash (#quienes-somos o #)
-  const [currentPage, setCurrentPage] = useState(() => 
-    window.location.hash === '#quienes-somos' ? 'about' : 'home'
-  );
+  const getPageFromHash = () => {
+    const hash = window.location.hash.toLowerCase();
+    if (hash === '#quienes-somos') return 'about';
+    if (hash === '#tienda') return 'shop';
+    return 'home';
+  };
+
+  const [currentPage, setCurrentPage] = useState(getPageFromHash);
 
   useEffect(() => {
     const handleHashChange = () => {
-      if (window.location.hash === '#quienes-somos') {
-        setCurrentPage('about');
-      } else {
-        setCurrentPage('home');
-      }
+      setCurrentPage(getPageFromHash());
     };
 
     window.addEventListener('hashchange', handleHashChange);
@@ -68,9 +69,13 @@ function App() {
 
   return (
     <>
-      {currentPage === 'about' ? (
+      {currentPage === 'about' && (
         <AboutPage navbar={navbarData} footer={footerData} />
-      ) : (
+      )}
+      {currentPage === 'shop' && (
+        <ShopPage navbar={navbarData} footer={footerData} />
+      )}
+      {currentPage === 'home' && (
         <HomePage navbar={navbarData} footer={footerData} />
       )}
     </>
