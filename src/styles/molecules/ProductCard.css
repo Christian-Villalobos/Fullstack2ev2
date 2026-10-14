@@ -1,4 +1,3 @@
-/* Tarjeta de un objeto a la venta */
 .product-card {
     display: flex;
     flex-direction: column;
@@ -8,6 +7,8 @@
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 8px;
+    width: 100%;
+    max-width: 280px;
 }
 
 .product-card img {

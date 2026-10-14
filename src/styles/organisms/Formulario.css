@@ -28,6 +28,7 @@
 
 /* Cajas de texto */
 .form input {
+    width: 100%;
     padding: 8px 10px;
     background: var(--color-fondo);
     color: var(--color-texto);
@@ -39,4 +40,12 @@
 .form input:focus {
     outline: none;
     border-color: var(--color-gold);
+}
+
+@media (max-width: 480px) {
+    .form {
+        margin: 20px auto;
+        padding: 16px;
+        width: 100%;
+    }
 }
