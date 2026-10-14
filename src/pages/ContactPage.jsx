@@ -33,7 +33,6 @@ const contactForm = {
   }
 };
 
-// Página: Suministra los datos reales al ContactTemplate
 export function ContactPage({ navbar, footer }) {
   return (
     <ContactTemplate
