@@ -6,9 +6,14 @@
     --color-cyan: #3ca8ac;
 }
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 /* Estilo base de toda la página */
 body {
     background-color: var(--color-fondo);
     color: var(--color-texto);
     margin: 0;
+    overflow-x: hidden;
 }

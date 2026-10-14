@@ -1,11 +1,8 @@
-/* Grilla: tantas tarjetas por fila como quepan */
 .product-list {
     display: grid;
-    /* auto-fit: si sobran columnas vacías, las elimina y
-       estira las tarjetas para ocupar todo el ancho */
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    /* Centra cada tarjeta verticalmente dentro de su celda */
-    align-items: center;
-    /* Separación entre tarjetas (horizontal y vertical) */
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    justify-content: center;
+    justify-items: center;
+    gap: 24px;
+    width: 100%;
 }
