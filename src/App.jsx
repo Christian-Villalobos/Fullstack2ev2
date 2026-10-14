@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ShopPage } from './pages/ShopPage';
+import { RegisterPage } from './pages/RegisterPage';
+import { LoginPage } from './pages/LoginPage';
 
 // Estilos globales y modulares
 import './styles/global.css';
@@ -15,6 +17,7 @@ import './styles/molecules/ImageCards.css';
 import './styles/organisms/Footer.css';
 import './styles/molecules/ProductCard.css'
 import './styles/organisms/ProductList.css'
+import './styles/organisms/Formulario.css';
 
 // ── Datos compartidos (Navbar y Footer) ──
 
@@ -26,13 +29,13 @@ const navbarData = {
   },
   links: [
     { label: "Inicio", href: "#inicio" },
-    { label: "Quienes somos", href: "#Quienes-somos" },
+    { label: "Quienes somos", href: "#quienes-somos" },
     { label: "Tienda", href: "#tienda" },
     { label: "Contacto", href: "#contacto" }
   ],
   buttons: [
-    { label: "Iniciar sesión", onClick: () => alert("Iniciar sesión"), className: "btn-gold" },
-    { label: "Registrarse", onClick: () => alert("Registrarse"), className: "btn-white" }
+    { label: "Iniciar sesión", onClick: () => { window.location.hash = '#login'; }, className: "btn-gold" },
+    { label: "Registrarse", onClick: () => { window.location.hash = '#registro'; }, className: "btn-white" }
   ]
 };
 
@@ -53,6 +56,9 @@ function App() {
     const hash = window.location.hash.toLowerCase();
     if (hash === '#quienes-somos') return 'about';
     if (hash === '#tienda') return 'shop';
+    if (hash === '#registro') return 'register';
+    if (hash === '#login') return 'login';
+    if (hash === '#inicio') return 'home';
     return 'home';
   };
 
@@ -77,6 +83,12 @@ function App() {
       )}
       {currentPage === 'home' && (
         <HomePage navbar={navbarData} footer={footerData} />
+      )}
+      {currentPage === 'register' && (
+        <RegisterPage navbar={navbarData} footer={footerData} />
+      )}
+      {currentPage === 'login' && (
+        <LoginPage navbar={navbarData} footer={footerData} />
       )}
     </>
   );

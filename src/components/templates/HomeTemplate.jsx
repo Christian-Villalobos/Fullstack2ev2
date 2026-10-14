@@ -8,7 +8,7 @@ import { Footer } from '../organisms/Footer';
 // Cambio: la prop "intro" ahora se llama "intros" (plural) porque será una lista.
 export function HomeTemplate({ navbar, titles, logo, intros, footer }) {
     return (
-        <div className="home">
+        <div className="shop">
             {/* 1. Barra superior */}
             <Navbar {...navbar} />
 

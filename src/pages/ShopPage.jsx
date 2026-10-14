@@ -1,5 +1,6 @@
 import { ShopTemplate } from '../components/templates/ShopTemplate';
 
+
 const shopTitles = [
   { variant: "h1", content: "Tienda de Divisas", className: "titulo-principal" },
   { variant: "p", content: "Compra y vende los mejores orbes y objetos de Path of Exile con entrega inmediata", className: "subtitulo" }

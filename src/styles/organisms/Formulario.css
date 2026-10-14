@@ -1,0 +1,42 @@
+/* Caja del formulario, centrada en la página */
+.form {
+    /* Ancho máximo: el formulario no se estira más de 400px */
+    max-width: 400px;
+    width: 100%;
+
+    /* Centrado horizontal: margen automático a izquierda y derecha */
+    margin: 40px auto;
+
+    /* Orden interno: un campo debajo del otro con espacio entre ellos */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    /* Aspecto de tarjeta (igual que ProductCard y TextImage) */
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+}
+
+/* Cada campo (label + input): uno sobre otro */
+.form div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Cajas de texto */
+.form input {
+    padding: 8px 10px;
+    background: var(--color-fondo);
+    color: var(--color-texto);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+}
+
+/* Cuando haces clic en una caja, el borde se pone dorado */
+.form input:focus {
+    outline: none;
+    border-color: var(--color-gold);
+}
