@@ -2,7 +2,7 @@ import { FormField } from '../molecules/FormField'
 import { Button } from '../atoms/Button'
 import { useState } from 'react'
 
-export function Formulario({ fields = [], onSubmit, buttonText = "Enviar", className = "" }) {
+export function Formulario({ fields = [], onSubmit, buttonText = "Enviar", className = "form" }) {
 
     const [formData, setFormData] = useState({});
 
@@ -28,7 +28,9 @@ export function Formulario({ fields = [], onSubmit, buttonText = "Enviar", class
                     onChange={handleChange(field.name)}
                 />
             ))}
-            <Button type="submit">{buttonText}</Button>
+            <Button className="btn-gold" type="submit">
+                {buttonText}
+            </Button>
         </form>
     );
 }
