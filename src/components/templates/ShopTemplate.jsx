@@ -4,17 +4,19 @@ import { ProductList } from '../organisms/ProductList';
 import { Footer } from '../organisms/Footer';
 
 // Template: solo define DÓNDE va cada pieza. No tiene datos propios.
-export function ShopTemplate({ navbar, titles, products, footer }) {
+// onAddToCart se pasa hacia abajo hasta ProductCard
+export function ShopTemplate({ navbar, titles, products, onAddToCart, footer }) {
     return (
         <div className="home">
-            {/* 1. Barra superior (reutilizamos la misma) */}
+            {/* 1. Barra superior */}
             <Navbar {...navbar} />
 
-            {/* 2. Título y subtítulo de la tienda */}
+            {/* 2. Título y subtítulo */}
             <Texts texts={titles} />
 
-            {/* 3. Lista de objetos a la venta */}
-            <ProductList products={products} />
+            {/* 3. Lista de productos */}
+            <ProductList products={products} onAddToCart={onAddToCart} />
+
             {/* 4. Footer */}
             {footer && <Footer {...footer} />}
         </div>
