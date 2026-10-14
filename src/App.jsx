@@ -69,6 +69,7 @@ function App() {
   // ── Navegación por hash ──
   const getPageFromHash = () => {
     const hash = window.location.hash.toLowerCase();
+    if (hash === '#inicio')        return 'home';
     if (hash === '#quienes-somos') return 'about';
     if (hash === '#tienda')        return 'shop';
     if (hash === '#carrito')       return 'cart';
@@ -96,7 +97,7 @@ function App() {
       className: "navbar-logo"
     },
     links: [
-      { label: "Inicio",        href: "#inicio" },
+      { label: "Inicio",        href: "#inicio" }, 
       { label: "Quienes somos", href: "#quienes-somos" },
       { label: "Tienda",        href: "#tienda" },
       // Badge dinámico: muestra la cantidad de items en el carrito
@@ -110,7 +111,6 @@ function App() {
 
   const footerData = {
     links: [
-      { label: "Inicio",                href: "#inicio" },
       { label: "Términos y condiciones",href: "#terminos" },
       { label: "Privacidad",            href: "#privacidad" },
       { label: "Contacto",              href: "#contacto" }
