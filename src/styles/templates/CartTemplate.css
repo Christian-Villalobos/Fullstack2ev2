@@ -1,0 +1,9 @@
+/* CartTemplate: layout base para la página del carrito */
+.cart-template {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
