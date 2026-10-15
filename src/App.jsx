@@ -8,6 +8,8 @@ import { LoginPage } from './pages/LoginPage';
 import { ContactPage } from './pages/ContactPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { TermsPage } from './pages/TermsPage';
+import { ProfilePage } from './pages/ProfilePage';                 // NUEVO
+import { getCurrentUser, logoutUser } from './services/auth';      // NUEVO
 
 // Estilos globales y modulares
 import './styles/global.css';
@@ -18,6 +20,7 @@ import './styles/templates/AboutTemplate.css';
 import './styles/templates/ContactTemplate.css';
 import './styles/templates/LegalTemplate.css';
 import './styles/templates/CartTemplate.css';
+import './styles/templates/ProfileTemplate.css';                   // NUEVO
 import './styles/molecules/TextImage.css';
 import './styles/molecules/TextsImages.css';
 import './styles/molecules/ImageCards.css';
@@ -27,6 +30,8 @@ import './styles/organisms/CartList.css';
 import './styles/molecules/ProductCard.css';
 import './styles/organisms/ProductList.css';
 import './styles/organisms/Formulario.css';
+import './styles/organisms/ProfileCard.css';                       // NUEVO
+import './styles/organisms/UserList.css';                          // NUEVO
 
 // ── Estado del carrito ──
 // El carrito vive en App para que sea accesible desde cualquier página.
@@ -66,9 +71,22 @@ function App() {
   // Total de unidades en el carrito (para el badge del navbar)
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
 
+  // ── Sesión ──  (NUEVO)
+  // Guardamos en el estado quién inició sesión (null si nadie).
+  // Así el navbar se actualiza solo cuando cambia.
+  const [currentUser, setCurrentUser] = useState(getCurrentUser);
+
+  // Cierra la sesión, actualiza el navbar y vuelve al inicio
+  const handleLogout = () => {
+    logoutUser();
+    setCurrentUser(null);
+    window.location.hash = '#inicio';
+  };
+
   // ── Navegación por hash ──
   const getPageFromHash = () => {
     const hash = window.location.hash.toLowerCase();
+
     if (hash === '#inicio')        return 'home';
     if (hash === '#quienes-somos') return 'about';
     if (hash === '#tienda')        return 'shop';
@@ -78,13 +96,20 @@ function App() {
     if (hash === '#terminos')      return 'terms';
     if (hash === '#registro')      return 'register';
     if (hash === '#login')         return 'login';
+    if (hash === '#perfil')        return 'profile'; // NUEVO
+
+    // Si el hash no coincide con ninguno (o está vacío), mostramos home
     return 'home';
   };
 
   const [currentPage, setCurrentPage] = useState(getPageFromHash);
 
   useEffect(() => {
-    const handleHashChange = () => setCurrentPage(getPageFromHash());
+    const handleHashChange = () => {
+      setCurrentPage(getPageFromHash());
+      // NUEVO: cada vez que se cambia de página, revisamos si hay sesión iniciada
+      setCurrentUser(getCurrentUser());
+    };
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
@@ -97,20 +122,27 @@ function App() {
       className: "navbar-logo"
     },
     links: [
-      { label: "Inicio",        href: "#inicio" }, 
+      { label: "Inicio",        href: "#inicio" },
       { label: "Quienes somos", href: "#quienes-somos" },
       { label: "Tienda",        href: "#tienda" },
       // Badge dinámico: muestra la cantidad de items en el carrito
       { label: cartCount > 0 ? `🛒 Carrito (${cartCount})` : "🛒 Carrito", href: "#carrito" }
     ],
-    buttons: [
-      { label: "Iniciar sesión", onClick: () => { window.location.hash = '#login'; }, className: "btn-gold" },
-      { label: "Registrarse",   onClick: () => { window.location.hash = '#registro'; }, className: "btn-white" }
-    ]
+    // NUEVO: los botones cambian según haya o no una sesión iniciada
+    buttons: currentUser
+      ? [
+          { label: "Mi perfil",      onClick: () => { window.location.hash = '#perfil'; }, className: "btn-gold" },
+          { label: "Cerrar sesión",  onClick: handleLogout,                                className: "btn-white" }
+        ]
+      : [
+          { label: "Iniciar sesión", onClick: () => { window.location.hash = '#login'; },    className: "btn-gold" },
+          { label: "Registrarse",    onClick: () => { window.location.hash = '#registro'; }, className: "btn-white" }
+        ]
   };
 
   const footerData = {
     links: [
+      { label: "Inicio",                href: "#inicio" },
       { label: "Términos y condiciones",href: "#terminos" },
       { label: "Privacidad",            href: "#privacidad" },
       { label: "Contacto",              href: "#contacto" }
@@ -129,6 +161,7 @@ function App() {
       {currentPage === 'terms'    && <TermsPage    navbar={navbarData} footer={footerData} />}
       {currentPage === 'register' && <RegisterPage navbar={navbarData} footer={footerData} />}
       {currentPage === 'login'    && <LoginPage    navbar={navbarData} footer={footerData} />}
+      {currentPage === 'profile'  && <ProfilePage  navbar={navbarData} footer={footerData} />}
     </>
   );
 }

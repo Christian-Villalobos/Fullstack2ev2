@@ -1,0 +1,36 @@
+/* Lista de usuarios (solo para el admin) */
+.user-list {
+    max-width: 760px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.user-list-title {
+    margin: 0;
+    font-size: 1.4rem;
+    text-align: center;
+    color: var(--color-gold, #afa124);
+}
+
+/* Tabla */
+.user-list table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.user-list th,
+.user-list td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Encabezados en dorado */
+.user-list th {
+    color: var(--color-gold, #afa124);
+}
