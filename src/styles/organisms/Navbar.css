@@ -1,5 +1,9 @@
 /* Navbar: distribución de logo, enlaces y botones */
 .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-fondo);
     display: flex;
     align-items: center;
     justify-content: space-between;
