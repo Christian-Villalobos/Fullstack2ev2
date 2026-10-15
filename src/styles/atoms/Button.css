@@ -16,3 +16,9 @@ button {
     background-color: var(--color-cyan, #3ca8ac); 
     color: #ffffff;
 }
+
+/* NUEVO: rojo para acciones de borrar */
+.btn-danger {
+    background-color: #b03a3a;
+    color: #ffffff;
+}
