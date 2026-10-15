@@ -8,7 +8,7 @@ import { Footer } from '../organisms/Footer';
 // Cambio: la prop "intro" ahora se llama "intros" (plural) porque será una lista.
 export function HomeTemplate({ navbar, titles, logo, intros, footer }) {
     return (
-        <div className="shop">
+        <div className="home">
             {/* 1. Barra superior */}
             <Navbar {...navbar} />
 
@@ -16,7 +16,7 @@ export function HomeTemplate({ navbar, titles, logo, intros, footer }) {
             <Texts texts={titles} />
 
             {/* 3. Logo grande centrado */}
-            <Image src={logo.src} alt={logo.alt} className="block mx-auto w-72 max-w-full h-auto" />
+            <Image src={logo.src} alt={logo.alt} className={logo.className}/>
 
             {/* 4. Lista de bloques texto + imagen.
                 TextsImages recorre el arreglo y crea un TextImage por cada elemento */}
