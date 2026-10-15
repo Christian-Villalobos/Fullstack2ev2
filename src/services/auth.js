@@ -77,3 +77,25 @@ export function getCurrentUser() {
 export function logoutUser() {
     localStorage.removeItem(CURRENT_USER_KEY);
 }
+
+// NUEVO: elimina un usuario usando su correo (el correo es único).
+// Devuelve { ok: true/false, message: "texto para mostrar" }
+export function deleteUser(email) {
+    const users = getUsers();
+
+    // Buscamos al usuario que se quiere borrar
+    const userToDelete = users.find(user => user.email === email);
+
+    // No se puede borrar si no existe o si es administrador
+    if (!userToDelete || userToDelete.role === 'admin') {
+        return { ok: false, message: 'No se puede eliminar este usuario.' };
+    }
+
+    // filter() crea una lista nueva con todos los usuarios MENOS el que tiene ese correo
+    const updatedUsers = users.filter(user => user.email !== email);
+
+    // Guardamos la lista nueva en localStorage
+    localStorage.setItem(USERS_KEY, JSON.stringify(updatedUsers));
+
+    return { ok: true, message: 'Usuario eliminado.' };
+}

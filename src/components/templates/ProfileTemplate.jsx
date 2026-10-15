@@ -5,7 +5,8 @@ import { UserList } from '../organisms/UserList';
 import { Footer } from '../organisms/Footer';
 
 // Template: solo define DÓNDE va cada pieza en la página de perfil
-export function ProfileTemplate({ navbar, titles, user, users, footer }) {
+// onDeleteUser se pasa hacia abajo hasta el botón de UserList
+export function ProfileTemplate({ navbar, titles, user, users, onDeleteUser, footer }) {
     return (
         <div className="profile-template">
             {/* 1. Barra superior */}
@@ -18,7 +19,7 @@ export function ProfileTemplate({ navbar, titles, user, users, footer }) {
             <ProfileCard user={user} />
 
             {/* 4. Lista de usuarios: SOLO se muestra si el usuario es administrador */}
-            {user.role === 'admin' && <UserList users={users} />}
+            {user.role === 'admin' && <UserList users={users} onDelete={onDeleteUser} />}
 
             {/* 5. Footer */}
             {footer && <Footer {...footer} />}

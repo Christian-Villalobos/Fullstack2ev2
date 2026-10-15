@@ -8,8 +8,8 @@ import { LoginPage } from './pages/LoginPage';
 import { ContactPage } from './pages/ContactPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { TermsPage } from './pages/TermsPage';
-import { ProfilePage } from './pages/ProfilePage';                 // NUEVO
-import { getCurrentUser, logoutUser } from './services/auth';      // NUEVO
+import { ProfilePage } from './pages/ProfilePage';
+import { getCurrentUser, logoutUser } from './services/auth';
 
 // Estilos globales y modulares
 import './styles/global.css';
@@ -20,7 +20,7 @@ import './styles/templates/AboutTemplate.css';
 import './styles/templates/ContactTemplate.css';
 import './styles/templates/LegalTemplate.css';
 import './styles/templates/CartTemplate.css';
-import './styles/templates/ProfileTemplate.css';                   // NUEVO
+import './styles/templates/ProfileTemplate.css';
 import './styles/molecules/TextImage.css';
 import './styles/molecules/TextsImages.css';
 import './styles/molecules/ImageCards.css';
@@ -30,21 +30,33 @@ import './styles/organisms/CartList.css';
 import './styles/molecules/ProductCard.css';
 import './styles/organisms/ProductList.css';
 import './styles/organisms/Formulario.css';
-import './styles/organisms/ProfileCard.css';                       // NUEVO
-import './styles/organisms/UserList.css';                          // NUEVO
-
-// ── Estado del carrito ──
-// El carrito vive en App para que sea accesible desde cualquier página.
-// Funciones:
-//   addToCart(product)   → agrega 1 unidad; si ya existe, suma qty
-//   removeFromCart(name) → quita 1 unidad; si qty llega a 0, elimina el item
-//   clearCart()          → vacía el carrito completamente
+import './styles/organisms/ProfileCard.css';
+import './styles/organisms/UserList.css';
 
 function App() {
-  // ── Carrito ──
+  // ── Sesión ──
+  // CAMBIO: este bloque ahora va ANTES del carrito, porque addToCart necesita saber
+  // si hay un usuario con sesión iniciada.
+  // currentUser guarda quién inició sesión (null si nadie).
+  const [currentUser, setCurrentUser] = useState(getCurrentUser);
+
+  // ── Estado del carrito ──
+  // El carrito vive en App para que sea accesible desde cualquier página.
+  // Funciones:
+  //   addToCart(product)   → agrega 1 unidad; si ya existe, suma qty (solo con sesión iniciada)
+  //   removeFromCart(name) → quita 1 unidad; si qty llega a 0, elimina el item
+  //   clearCart()          → vacía el carrito completamente
   const [cart, setCart] = useState([]);
 
   const addToCart = (product) => {
+    // NUEVO: si no hay sesión iniciada, no dejamos comprar.
+    // Avisamos, llevamos a la persona al login y salimos de la función con return.
+    if (!currentUser) {
+      alert('Debes iniciar sesión para comprar.');
+      window.location.hash = '#login';
+      return;
+    }
+
     setCart(prev => {
       const exists = prev.find(item => item.name === product.name);
       if (exists) {
@@ -71,15 +83,11 @@ function App() {
   // Total de unidades en el carrito (para el badge del navbar)
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
 
-  // ── Sesión ──  (NUEVO)
-  // Guardamos en el estado quién inició sesión (null si nadie).
-  // Así el navbar se actualiza solo cuando cambia.
-  const [currentUser, setCurrentUser] = useState(getCurrentUser);
-
   // Cierra la sesión, actualiza el navbar y vuelve al inicio
   const handleLogout = () => {
     logoutUser();
     setCurrentUser(null);
+    clearCart();                    // NUEVO: al cerrar sesión se vacía el carrito
     window.location.hash = '#inicio';
   };
 
@@ -96,7 +104,7 @@ function App() {
     if (hash === '#terminos')      return 'terms';
     if (hash === '#registro')      return 'register';
     if (hash === '#login')         return 'login';
-    if (hash === '#perfil')        return 'profile'; // NUEVO
+    if (hash === '#perfil')        return 'profile';
 
     // Si el hash no coincide con ninguno (o está vacío), mostramos home
     return 'home';
@@ -107,7 +115,7 @@ function App() {
   useEffect(() => {
     const handleHashChange = () => {
       setCurrentPage(getPageFromHash());
-      // NUEVO: cada vez que se cambia de página, revisamos si hay sesión iniciada
+      // Cada vez que se cambia de página, revisamos si hay sesión iniciada
       setCurrentUser(getCurrentUser());
     };
     window.addEventListener('hashchange', handleHashChange);
@@ -128,7 +136,7 @@ function App() {
       // Badge dinámico: muestra la cantidad de items en el carrito
       { label: cartCount > 0 ? `🛒 Carrito (${cartCount})` : "🛒 Carrito", href: "#carrito" }
     ],
-    // NUEVO: los botones cambian según haya o no una sesión iniciada
+    // Los botones cambian según haya o no una sesión iniciada
     buttons: currentUser
       ? [
           { label: "Mi perfil",      onClick: () => { window.location.hash = '#perfil'; }, className: "btn-gold" },
