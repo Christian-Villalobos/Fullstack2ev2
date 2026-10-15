@@ -10,10 +10,27 @@
     box-sizing: border-box;
 }
 
+html, body, #root {
+    min-height: 100vh;
+}
+
 /* Estilo base de toda la página */
 body {
     background-color: var(--color-fondo);
     color: var(--color-texto);
     margin: 0;
     overflow-x: hidden;
+}
+
+/* Todos los templates ocupan al menos el 100% de la ventana para empujar el footer */
+.home,
+.about-template,
+.cart-template,
+.contact-template,
+.legal-template,
+.login,
+.register {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
