@@ -134,7 +134,7 @@ function App() {
   // ── Datos compartidos ──
   const navbarData = {
     logo: {
-      src: '/images/Path-of-Exile-Logo.webp',
+      src: '/images/logo.webp',
       alt: "Logo del sitio",
       className: "navbar-logo"
     },
@@ -159,7 +159,6 @@ function App() {
 
   const footerData = {
     links: [
-      { label: "Inicio",                href: "#inicio" },
       { label: "Términos y condiciones",href: "#terminos" },
       { label: "Privacidad",            href: "#privacidad" },
       { label: "Contacto",              href: "#contacto" }
