@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "karma start karma.conf.cjs",
+    "test:watch": "karma start karma.conf.cjs --no-single-run --browsers Chrome"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

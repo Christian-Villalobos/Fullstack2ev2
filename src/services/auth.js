@@ -20,8 +20,9 @@ export function getUsers() {
         return JSON.parse(saved);
     }
 
-    localStorage.setItem(USERS_KEY, JSON.stringify(defaultUsers));
-    return defaultUsers;
+    const initial = defaultUsers.map(user => ({ ...user }));
+    localStorage.setItem(USERS_KEY, JSON.stringify(initial));
+    return initial;
 }
 
 // Registra un usuario nuevo.
