@@ -10,6 +10,7 @@ import { PrivacyPage } from './pages/PrivacyPage';
 import { TermsPage } from './pages/TermsPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { getCurrentUser, logoutUser } from './services/auth';
+import { getCart, saveCart } from './services/cart';            // NUEVO
 
 // Estilos globales y modulares
 import './styles/global.css';
@@ -35,9 +36,8 @@ import './styles/organisms/UserList.css';
 
 function App() {
   // ── Sesión ──
-  // CAMBIO: este bloque ahora va ANTES del carrito, porque addToCart necesita saber
-  // si hay un usuario con sesión iniciada.
   // currentUser guarda quién inició sesión (null si nadie).
+  // Va antes del carrito porque el carrito necesita saber si hay sesión.
   const [currentUser, setCurrentUser] = useState(getCurrentUser);
 
   // ── Estado del carrito ──
@@ -46,10 +46,19 @@ function App() {
   //   addToCart(product)   → agrega 1 unidad; si ya existe, suma qty (solo con sesión iniciada)
   //   removeFromCart(name) → quita 1 unidad; si qty llega a 0, elimina el item
   //   clearCart()          → vacía el carrito completamente
-  const [cart, setCart] = useState([]);
+
+  // CAMBIO: el carrito ahora empieza con lo que haya guardado en localStorage,
+  // pero solo si hay una sesión iniciada. Si no hay sesión, empieza vacío.
+  const [cart, setCart] = useState(() => (currentUser ? getCart() : []));
+
+  // NUEVO: cada vez que "cart" cambia (agregar, quitar, vaciar), lo guardamos en localStorage.
+  // El [cart] del final significa: "ejecuta esto solo cuando cart cambie".
+  useEffect(() => {
+    saveCart(cart);
+  }, [cart]);
 
   const addToCart = (product) => {
-    // NUEVO: si no hay sesión iniciada, no dejamos comprar.
+    // Si no hay sesión iniciada, no dejamos comprar.
     // Avisamos, llevamos a la persona al login y salimos de la función con return.
     if (!currentUser) {
       alert('Debes iniciar sesión para comprar.');
@@ -87,7 +96,7 @@ function App() {
   const handleLogout = () => {
     logoutUser();
     setCurrentUser(null);
-    clearCart();                    // NUEVO: al cerrar sesión se vacía el carrito
+    clearCart();                    // Al cerrar sesión se vacía el carrito (y el useEffect lo guarda vacío)
     window.location.hash = '#inicio';
   };
 
