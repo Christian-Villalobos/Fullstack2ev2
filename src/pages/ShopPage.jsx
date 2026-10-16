@@ -6,10 +6,10 @@ const shopTitles = [
 ];
 
 const defaultProducts = [
-  { name: "Divine Orb",        price: "$2.00 USD",   src: "/images/poe2-soldier.webp",         alt: "Divine Orb" },
-  { name: "Chaos Orb",         price: "$0.15 USD",   src: "/images/poe2-soldier.webp",         alt: "Chaos Orb" },
-  { name: "Mirror of Kalandra",price: "$250.00 USD", src: "/images/Path-of-Exile-Logo.webp",   alt: "Mirror of Kalandra" },
-  { name: "Exalted Orb",       price: "$0.50 USD",   src: "/images/poe2-soldier.webp",         alt: "Exalted Orb" }
+  { name: "Divine Orb",        price: "$2.00 USD",   src: "/images/divine.webp",         alt: "Divine Orb" },
+  { name: "Chaos Orb",         price: "$0.15 USD",   src: "/images/chaos.webp",         alt: "Chaos Orb" },
+  { name: "Mirror of Kalandra",price: "$250.00 USD", src: "/images/mirror.webp",   alt: "Mirror of Kalandra" },
+  { name: "Exalted Orb",       price: "$0.50 USD",   src: "/images/exalted.webp",         alt: "Exalted Orb" }
 ];
 
 // Página: Recibe onAddToCart desde App.jsx y lo pasa al template

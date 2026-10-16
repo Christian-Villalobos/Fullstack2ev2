@@ -6,7 +6,7 @@ const defaultTitles = [
 ];
 
 const defaultLogo = {
-  src: '/images/Path-of-Exile-Logo.webp',
+  src: '/images/logo.webp',
   alt: "Logo Path of Exile",
   className: "logo"
 };
@@ -18,7 +18,7 @@ const defaultIntros = [
     content: "Bienvenido a la plataforma de intercambio de divisas para Path of Exile. Encuentra Divine Orbs, Chaos Orbs, Mirror of Kalandra y comercia directamente con otros jugadores con máxima confianza."
   },
   {
-    src: '/images/poe2-soldier.webp',
+    src: '/images/pathfinder.webp',
     alt: "Compra segura",
     content: "Todas las transacciones son rápidas y seguras. Compra y vende sin complicaciones con soporte 24/7.",
     className: "reverse"
